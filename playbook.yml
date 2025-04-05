@@ -1,0 +1,40 @@
+---
+- name: Minimal Dev Tool Setup for MacOS
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  pre_tasks:
+    - name: Ensure Homebrew is installed
+      shell: |
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      args:
+        creates: /opt/homebrew/bin/brew
+
+    - name: Install community.general collection (required for homebrew_cask)
+      command: ansible-galaxy collection install community.general
+
+  tasks:
+    - name: Install GUI apps via Homebrew Cask
+      community.general.homebrew_cask:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - visual-studio-code
+        - slack
+        - github
+        - postman
+        - google-chrome
+        - anydesk
+
+    - name: Install nvm (Node Version Manager)
+      shell: |
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+      args:
+        creates: ~/.nvm
+
+    - name: Install Node.js LTS via nvm
+      shell: |
+        export NVM_DIR="$HOME/.nvm"
+        source "$NVM_DIR/nvm.sh"
+        nvm install --lts 
