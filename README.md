@@ -8,6 +8,8 @@ Bu Ansible playbook'u, macOS'ta geliştirme ortamınızı hızlıca kurmanızı 
 - Postman
 - Google Chrome
 - AnyDesk
+- FortiClient VPN
+- Microsoft Outlook
 - Node.js (nvm ile)
 
 ## Proje Yapısı

@@ -26,6 +26,8 @@
         - postman
         - google-chrome
         - anydesk
+        - forticlient
+        - microsoft-outlook
 
     - name: Install nvm (Node Version Manager)
       shell: |
